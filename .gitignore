@@ -1,3 +1,74 @@
+# This repository is PUBLIC. Anything committed here is visible to everyone,
+# and stays visible in the history even after it is deleted in a later commit.
+# Never commit a real key, token or password — if one gets in, rotate it first,
+# then rewrite the history.
+
+# ---- environment files ----
+.env
+.env.*
+*.env
+# a template with placeholder values is fine to share
+!.env.example
+!.env.sample
+
+# ---- keys and certificates ----
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.asc
+*.gpg
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+*.ppk
+.ssh/
+
+# ---- credential files ----
+credentials
+credentials.json
+client_secret*.json
+service-account*.json
+*-service-account.json
+gha-creds-*.json
+.netrc
+.npmrc
+.pypirc
+.aws/
+.gcloud/
+secrets.*
+*.secret
+*.secrets
+
+# ---- local config that tends to hold keys ----
+*.local
+config.local.*
+settings.local.json
+.firebaserc
+firebase-adminsdk*.json
+
+# ---- editor and OS noise ----
 .DS_Store
-*.bak
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*~
+
+# ---- build and dependency output ----
 node_modules/
+dist/
+build/
+coverage/
+*.log
+npm-debug.log*
+
+# ---- scratch ----
+*.bak
+*.tmp
+tmp/
+scratch/
