@@ -17,14 +17,14 @@ const holding10 = JSON.stringify([
 test("a fresh run starts on the replay's first day", () => {
   const page = loadPage({ storage: base() });
   assert.match(page.el("clockDate").textContent, /Sep 24, 2025/);
-  assert.match(page.el("clockProg").textContent, /day 1 of 253/);
+  assert.match(page.el("clockProg").textContent, /day 1 of 258/);
 });
 
 test("advancing a day moves to the next trading day", () => {
   const page = loadPage({ storage: base({ "stake.date.v1": START_DATE, "stake.watch.v1": '["AAPL"]' }) });
   page.dispatch(page.el("nextDay"), "click");
   assert.match(page.el("clockDate").textContent, /Sep 25, 2025/);
-  assert.match(page.el("clockProg").textContent, /day 2 of 253/);
+  assert.match(page.el("clockProg").textContent, /day 2 of 258/);
   assert.match(textOf(page.el("watchList").children[0]), /\$256\.87/);
 });
 
@@ -57,12 +57,12 @@ test("the day is remembered across a reload", () => {
 });
 
 test("the replay stops at the present instead of running off the end", () => {
-  const page = loadPage({ storage: base({ "stake.date.v1": "2026-09-23" }) });
+  const page = loadPage({ storage: base({ "stake.date.v1": "2026-09-30" }) });
   page.dispatch(page.el("nextWeek"), "click");
   assert.match(page.el("clockProg").textContent, /reached the present/);
   assert.equal(page.el("nextDay").disabled, true);
   assert.equal(page.el("nextWeek").disabled, true);
-  assert.match(page.el("clockDate").textContent, /Sep 25, 2026/);
+  assert.match(page.el("clockDate").textContent, /Oct 2, 2026/);
 });
 
 test("the S&P 500 comparison appears once there is a trade to compare", () => {
@@ -76,13 +76,13 @@ test("a month jump moves about twenty-one trading days", () => {
   const page = loadPage({ storage: base({ "stake.date.v1": START_DATE }) });
   page.dispatch(page.el("nextMonth"), "click");
   assert.match(page.el("clockDate").textContent, /Oct 2[0-9], 2025/);
-  assert.match(page.el("clockProg").textContent, /day 22 of 253/);
+  assert.match(page.el("clockProg").textContent, /day 22 of 258/);
 });
 
 test("skipping to the end lands on the last day of the replay", () => {
   const page = loadPage({ storage: base({ "stake.date.v1": START_DATE }) });
   page.dispatch(page.el("skipEnd"), "click");
-  assert.match(page.el("clockDate").textContent, /Sep 25, 2026/);
+  assert.match(page.el("clockDate").textContent, /Oct 2, 2026/);
   assert.match(page.el("clockProg").textContent, /reached the present/);
   assert.equal(page.el("skipEnd").hidden, true, "nothing left to skip to");
 });

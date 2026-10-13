@@ -27,7 +27,7 @@ That last point is the whole thing. A position you bought on Tuesday is worth so
 
 ## The replay
 
-The simulation begins on **Wednesday, 24 September 2025** and runs forward through **253 trading days** — one full year of real market history, ending at the present.
+The simulation begins on **Wednesday, 24 September 2025** and runs forward through **258 trading days** — one full year of real market history, ending at the present.
 
 You move through it with **+1 day**, **+1 week**, **+1 month**, or **Skip to the end**. Every price you see is that day's actual closing price.
 
@@ -70,11 +70,11 @@ There is nothing to install, no build step, no account, no API key, and **no net
 
 ## The data
 
-**117 companies and funds · 1,272 trading days · 1 September 2021 → 25 September 2026**
+**117 companies and funds · 1,277 trading days · 1 September 2021 → 2 October 2026**
 
 Real daily closing prices from Nasdaq, stored in the file as integer cents against a shared trading-day calendar. The replay starts with four years of history behind it, so the longer chart ranges have something real to show, and one year ahead of it to play.
 
-Prices are fixed at the day they were fetched. That is a deliberate trade: the app works instantly, offline, forever, with no signup — at the cost of not extending past September 2026. Refreshing the dataset is a build-time step, not something the app does at runtime.
+Prices are fixed at the day they were fetched. That is a deliberate trade: the app works instantly, offline, forever, with no signup — at the cost of not extending past the last refresh. Bringing it up to date is a build-time step, not something the app does at runtime: run `node tools/extend-prices.js`.
 
 > A note on why: a web page can only fetch from servers that explicitly allow it. No dependable free stock API does, without a key. But that restriction applies to *browsers*, not to a script run on a machine — so the prices were fetched once, up front, and written into the page.
 
